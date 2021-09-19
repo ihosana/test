@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import {Text,View,ScrollView,TouchableOpacity, Image, ImageBackground} from 'react-native';
-let img1 = require("../images/img1.png")
-let img2 = require("../images/img2.png")
-let img3 = require("../images/img3.png")
-
+let img1 = require("../imagens/img1.png")
+let img2 = require("../imagens/img2.png")
+let img3 = require("../imagens/img3.png")
 export default class MyList extends Component {
-    constructor(props){
-    super(props);
-    this.state = {
-       loading: false,
-       data: [],
-       current_page: 1,
-       imagem:[img1, img2, img3],
-       error: null,
-       hasMore: true,
-       
-     }}
-     
+    state = {
+        loading: false,
+        data: [],
+        current_page: 1,
+        error: null,
+        hasMore: true
+      }
+      
      componentDidMount(){
           this.getListOfData();
           this.isCloseToBottom();
+          this.renderList();
          };
 
      getListOfData = () => {
@@ -29,19 +25,19 @@ export default class MyList extends Component {
         newData.push({
             title: "Lorem ipsum", 
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in congue risus, non viverra tellus. Nam faucibus ligula non metus ultrices mollis. Cras dolor purus, hendrerit eu eros quis, dignissim eleifend mi. In tincidunt mi in diam egestas congue ac ut purus. Nulla semper libero vitae blandit vehicula.",
-            image: this.state.img1,
+            image: img1,
             id: this.state.data.length
         });
         newData.push({
             title: "Curabitur vulputate", 
             text: "Curabitur vulputate enim in lacus imperdiet, a convallis odio posuere. Nulla id ex et purus sodales rutrum non eu eros. Ut consequat est lacus.",
-            image: this.state.img2,
+            image: img2,
             id: this.state.data.length+1
         });
         newData.push({
             title: "Proin hendrerit", 
             text: "Proin hendrerit nisl id turpis bibendum, sit amet scelerisque augue elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a blandit sapien.",
-            image: this.state.img3,
+            image: img3,
             id: this.state.data.length+2
         });
         this.setState({
@@ -49,7 +45,7 @@ export default class MyList extends Component {
             data: [...this.state.data, ...newData],
             loading: false,
             current_page: this.state.current_page + 1,
-           
+         
         });
        
     }
@@ -63,8 +59,7 @@ export default class MyList extends Component {
           return ( 
             <TouchableOpacity key={u.id}>
                     <View style={{ padding: 10 }}>
-                        <Image style={{width:200, height:180, backgroundColor:"black"}} 
-                        
+                        <Image style={{width:200, height:180}} 
                         source={u.image}/>   
                       
                        <Text style={{ fontSize: 15}}>{u.title}</Text>        
