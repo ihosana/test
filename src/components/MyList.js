@@ -14,8 +14,6 @@ export default class MyList extends Component {
       
      componentDidMount(){
           this.getListOfData();
-          this.isCloseToBottom();
-          this.renderList();
          };
 
      getListOfData = () => {
@@ -50,16 +48,17 @@ export default class MyList extends Component {
        
     }
 
-    isCloseToBottom( layoutMeasurement, contentOffset, contentSize ) {   
-        return (layoutMeasurement + contentOffset
-        >= contentSize - 50); 
+   
+    isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {   
+        return layoutMeasurement.height + contentOffset.y 
+        >= contentSize.height - 50; 
     }
     renderList = () => {
         return ( this.state.data.map((u) => {
           return ( 
             <TouchableOpacity key={u.id}>
                     <View style={{ padding: 10 }}>
-                        <Image style={{width:200, height:180}} 
+                        <Image style={{width:'100%', height:180}} 
                         source={u.image}/>   
                       
                        <Text style={{ fontSize: 15}}>{u.title}</Text>        
